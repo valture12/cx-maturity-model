@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج تقييم النضج المؤسسي — الإدارة العامة لتجربة المستفيد</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0B2545;
+  --navy-mid: #134074;
+  --navy-light: #1A5276;
+  --gold: #C9A84C;
+  --gold-light: #F0D090;
+  --gold-pale: #FDF6E3;
+  --teal: #0E8688;
+  --teal-light: #E8F8F5;
+  --white: #FFFFFF;
+  --off-white: #F8F7F4;
+  --gray-100: #F1EEE8;
+  --gray-200: #DDD9CF;
+  --gray-400: #9A9589;
+  --gray-600: #5A5650;
+  --gray-800: #2C2B28;
+  --red: #C0392B;
+  --red-light: #FADBD8;
+  --orange: #D35400;
+  --orange-light: #FDEBD0;
+  --green: #1E8449;
+  --green-light: #D5F5E3;
+  --blue: #1A5276;
+  --blue-light: #D6EAF8;
+  --purple: #6C3483;
+  --purple-light: #E8DAEF;
+  --sidebar-w: 260px;
+  --header-h: 70px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--off-white);
+  color: var(--gray-800);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+.header {
+  position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+  height: var(--header-h);
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  border-bottom: 3px solid var(--gold);
+}
+.header-logo {
+  display: flex; align-items: center; gap: 14px;
+}
+.logo-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, #E8C56C 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--navy); font-weight: 900;
+}
+.header-title { color: var(--white); }
+.header-title h1 { font-size: 16px; font-weight: 700; line-height: 1.2; }
+.header-title p  { font-size: 11px; color: var(--gold-light); font-weight: 400; }
+
+.header-actions { display: flex; gap: 8px; }
+.btn-header {
+  padding: 8px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif;
+  font-size: 12px; font-weight: 600; cursor: pointer; border: none;
+  transition: all 0.2s;
+}
+.btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.35); color: var(--white); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-gold:hover { background: var(--gold-light); }
+
+/* ── LAYOUT ── */
+.layout { display: flex; padding-top: var(--header-h); min-height: 100vh; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed; top: var(--header-h); right: 0; bottom: 0;
+  width: var(--sidebar-w); background: var(--white);
+  border-left: 1px solid var(--gray-200);
+  overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column;
+  z-index: 50;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 2px; }
+
+.score-panel {
+  padding: 20px 16px;
+  background: var(--navy);
+  color: var(--white);
+}
+.score-panel-title { font-size: 11px; color: var(--gold-light); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 14px; }
+.score-main {
+  text-align: center; margin-bottom: 16px;
+}
+.score-big { font-size: 42px; font-weight: 900; color: var(--gold); line-height: 1; }
+.score-of { font-size: 14px; color: var(--gold-light); }
+.score-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; margin-top: 6px;
+  background: rgba(201,168,76,0.2); color: var(--gold-light);
+}
+.dept-scores { display: flex; flex-direction: column; gap: 8px; }
+.dept-score-row { }
+.dept-score-label { font-size: 11px; color: rgba(255,255,255,0.7); margin-bottom: 3px; display: flex; justify-content: space-between; }
+.dept-score-label span:last-child { color: var(--gold); font-weight: 600; }
+.dept-bar-bg { background: rgba(255,255,255,0.15); border-radius: 4px; height: 6px; overflow: hidden; }
+.dept-bar-fill { height: 6px; border-radius: 4px; transition: width 0.5s ease; }
+
+.nav-section { padding: 12px 0; flex: 1; }
+.nav-group-title {
+  font-size: 10px; font-weight: 700; color: var(--gray-400);
+  letter-spacing: 1px; padding: 8px 16px 4px;
+  text-transform: uppercase;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 16px; cursor: pointer;
+  transition: all 0.15s; border-right: 3px solid transparent;
+  font-size: 13px; color: var(--gray-600); font-weight: 500;
+}
+.nav-item:hover { background: var(--gray-100); color: var(--navy); }
+.nav-item.active { background: var(--teal-light); color: var(--teal); border-right-color: var(--teal); font-weight: 600; }
+.nav-item.active .nav-dot { background: var(--teal); }
+.nav-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gray-200); flex-shrink: 0; transition: background 0.15s;
+}
+.nav-sub {
+  padding: 6px 16px 6px 16px;
+  display: none;
+}
+.nav-sub.open { display: block; }
+.nav-sub-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px 6px 0; cursor: pointer;
+  font-size: 12px; color: var(--gray-400);
+  transition: color 0.15s; border-radius: 6px;
+}
+.nav-sub-item:hover { color: var(--navy); }
+.nav-sub-item.active { color: var(--teal); font-weight: 600; }
+
+.nav-score-badge {
+  margin-right: auto; font-size: 11px; font-weight: 700;
+  padding: 1px 7px; border-radius: 10px;
+  background: var(--gray-100); color: var(--gray-600);
+}
+.nav-score-badge.filled { background: var(--teal-light); color: var(--teal); }
+
+/* ── MAIN CONTENT ── */
+.main {
+  margin-right: var(--sidebar-w);
+  padding: 30px 36px 60px;
+  flex: 1; max-width: calc(100vw - var(--sidebar-w));
+}
+
+/* ── SECTION HEADER ── */
+.section-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.section-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  margin-bottom: 10px; letter-spacing: 0.3px;
+}
+.section-header h2 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+.section-header p  { font-size: 13px; color: var(--gray-400); }
+.section-meta {
+  display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap;
+}
+.meta-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--gray-600);
+}
+.meta-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── DEPT PANEL ── */
+.dept-panel { display: none; }
+.dept-panel.active { display: block; }
+
+/* ── SECTION CARD ── */
+.section-card {
+  background: var(--white); border-radius: 14px;
+  border: 1px solid var(--gray-200);
+  margin-bottom: 20px; overflow: hidden;
+}
+.section-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid transparent;
+}
+.section-card-header:hover { background: var(--gray-100); }
+.section-card-header.open { border-bottom-color: var(--gray-200); }
+.section-card-title { display: flex; align-items: center; gap: 12px; }
+.section-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; flex-shrink: 0;
+}
+.section-card-name { font-size: 15px; font-weight: 700; color: var(--navy); }
+.section-card-sub  { font-size: 11px; color: var(--gray-400); margin-top: 1px; }
+.section-card-meta { display: flex; align-items: center; gap: 12px; }
+.section-weight-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px;
+  background: var(--gray-100); color: var(--gray-600); font-weight: 600;
+}
+.section-score-circle {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  background: var(--gray-100); color: var(--gray-400);
+  border: 2px solid var(--gray-200); transition: all 0.3s;
+}
+.section-score-circle.scored { background: var(--teal-light); color: var(--teal); border-color: var(--teal); }
+.toggle-icon { color: var(--gray-400); font-size: 12px; transition: transform 0.25s; }
+.toggle-icon.open { transform: rotate(180deg); }
+
+.section-card-body {
+  padding: 0 20px;
+  max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+}
+.section-card-body.open { max-height: 3000px; padding: 20px; }
+
+/* ── CRITERION ROW ── */
+.criterion {
+  background: var(--off-white); border-radius: 10px;
+  padding: 16px; margin-bottom: 12px; border: 1px solid var(--gray-100);
+  transition: border-color 0.2s;
+}
+.criterion:last-child { margin-bottom: 0; }
+.criterion.highlighted { border-color: var(--teal); }
+.criterion-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
+.criterion-info { flex: 1; }
+.criterion-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.criterion-desc { font-size: 12px; color: var(--gray-400); }
+.criterion-weight { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--gray-100); color: var(--gray-600); font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+
+.criterion-evidence { font-size: 11px; color: var(--teal); margin-bottom: 12px; }
+.criterion-evidence span { color: var(--gray-400); }
+
+/* ── LEVEL SELECTOR ── */
+.level-selector { display: flex; gap: 6px; flex-wrap: wrap; }
+.level-btn {
+  flex: 1; min-width: 80px;
+  padding: 8px 4px; border-radius: 8px; cursor: pointer;
+  border: 1.5px solid var(--gray-200); background: var(--white);
+  text-align: center; transition: all 0.15s; user-select: none;
+}
+.level-btn:hover { border-color: var(--navy); }
+.level-btn .lb-num { font-size: 18px; font-weight: 900; line-height: 1; color: var(--gray-200); transition: color 0.15s; }
+.level-btn .lb-name { font-size: 10px; color: var(--gray-400); margin-top: 2px; font-weight: 600; }
+.level-btn .lb-desc { font-size: 10px; color: var(--gray-400); margin-top: 4px; line-height: 1.4; display: none; }
+
+.level-btn.sel-1 { border-color: var(--red); background: var(--red-light); }
+.level-btn.sel-1 .lb-num { color: var(--red); }
+.level-btn.sel-1 .lb-name { color: var(--red); }
+.level-btn.sel-2 { border-color: var(--orange); background: var(--orange-light); }
+.level-btn.sel-2 .lb-num { color: var(--orange); }
+.level-btn.sel-2 .lb-name { color: var(--orange); }
+.level-btn.sel-3 { border-color: #7D6608; background: #FEF9E7; }
+.level-btn.sel-3 .lb-num { color: #7D6608; }
+.level-btn.sel-3 .lb-name { color: #7D6608; }
+.level-btn.sel-4 { border-color: var(--blue); background: var(--blue-light); }
+.level-btn.sel-4 .lb-num { color: var(--blue); }
+.level-btn.sel-4 .lb-name { color: var(--blue); }
+.level-btn.sel-5 { border-color: var(--purple); background: var(--purple-light); }
+.level-btn.sel-5 .lb-num { color: var(--purple); }
+.level-btn.sel-5 .lb-name { color: var(--purple); }
+
+.level-btn.expanded .lb-desc { display: block; }
+
+/* ── OVERVIEW PAGE ── */
+.overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+.overview-card {
+  background: var(--white); border-radius: 14px; padding: 20px;
+  border: 1px solid var(--gray-200); cursor: pointer; transition: all 0.2s;
+}
+.overview-card:hover { border-color: var(--teal); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14,134,136,0.1); }
+.ov-badge { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; margin-bottom: 12px; display: inline-block; }
+.ov-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.ov-sub   { font-size: 12px; color: var(--gray-400); margin-bottom: 14px; }
+.ov-score { font-size: 32px; font-weight: 900; line-height: 1; }
+.ov-score-of { font-size: 13px; color: var(--gray-400); }
+.ov-bar-bg { background: var(--gray-100); border-radius: 4px; height: 6px; margin-top: 10px; overflow: hidden; }
+.ov-bar-fill { height: 6px; border-radius: 4px; transition: width 0.6s ease; }
+.ov-sections { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.ov-sec-row { display: flex; justify-content: space-between; font-size: 12px; }
+.ov-sec-name { color: var(--gray-600); }
+.ov-sec-score { font-weight: 700; }
+
+.levels-reference {
+  background: var(--white); border-radius: 14px; border: 1px solid var(--gray-200);
+  padding: 20px; margin-bottom: 28px;
+}
+.levels-reference h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.levels-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.level-ref-card { border-radius: 10px; padding: 12px; text-align: center; }
+.level-ref-num { font-size: 22px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+.level-ref-name { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.level-ref-range { font-size: 10px; opacity: 0.7; }
+
+.formula-card {
+  background: var(--navy); border-radius: 14px; padding: 20px; color: var(--white); margin-bottom: 28px;
+}
+.formula-card h3 { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 14px; }
+.formula-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.formula-item { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 12px; }
+.formula-item-title { font-size: 11px; color: var(--gold-light); font-weight: 700; margin-bottom: 6px; }
+.formula-item code { font-family: 'Courier New', monospace; font-size: 11px; color: var(--white); line-height: 1.6; display: block; }
+
+/* ── RESULTS PAGE ── */
+.results-hidden { display: none; }
+.results-visible { display: block; }
+
+.result-gauge {
+  background: var(--white); border-radius: 14px; border: 1px solid var(--gray-200);
+  padding: 30px 20px; text-align: center; margin-bottom: 20px;
+}
+.gauge-score { font-size: 72px; font-weight: 900; line-height: 1; }
+.gauge-of { font-size: 20px; color: var(--gray-400); }
+.gauge-label { font-size: 18px; font-weight: 700; margin-top: 8px; }
+.gauge-bar-wrap { max-width: 400px; margin: 20px auto 0; }
+.gauge-bar-bg { background: var(--gray-100); border-radius: 8px; height: 12px; overflow: hidden; }
+.gauge-bar-fill { height: 12px; border-radius: 8px; transition: width 1s ease; }
+
+.results-depts { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
+.result-dept-card {
+  background: var(--white); border-radius: 12px; border: 1px solid var(--gray-200); padding: 16px;
+}
+.result-dept-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.result-dept-score { font-size: 28px; font-weight: 900; }
+.result-dept-level { font-size: 11px; font-weight: 600; margin-top: 2px; }
+.result-dept-bar-bg { background: var(--gray-100); border-radius: 4px; height: 6px; margin-top: 10px; overflow: hidden; }
+.result-dept-bar { height: 6px; border-radius: 4px; transition: width 0.8s ease; }
+
+.gaps-card {
+  background: var(--white); border-radius: 14px; border: 1px solid var(--gray-200); padding: 20px; margin-bottom: 20px;
+}
+.gaps-card h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.gap-row {
+  display: grid; grid-template-columns: 180px 1fr 60px 80px 1fr;
+  gap: 10px; align-items: center; padding: 10px 0;
+  border-bottom: 1px solid var(--gray-100); font-size: 12px;
+}
+.gap-row:last-child { border-bottom: none; }
+.gap-row-hd { font-size: 11px; font-weight: 700; color: var(--gray-400); }
+.gap-section { font-weight: 600; color: var(--navy); }
+.gap-criterion { color: var(--gray-600); }
+.gap-score { font-weight: 700; }
+.gap-badge { padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; }
+.gap-rec { font-size: 11px; color: var(--gray-400); }
+
+/* ── PRINT ── */
+@media print {
+  .header, .sidebar, .btn-header { display: none !important; }
+  .main { margin-right: 0 !important; padding: 20px !important; }
+  .layout { padding-top: 0 !important; }
+  .section-card-body { max-height: none !important; padding: 20px !important; }
+  .dept-panel { display: block !important; }
+  body { font-size: 11px; }
+}
+
+/* ── TOOLTIP ── */
+.tooltip-wrap { position: relative; }
+.tooltip-box {
+  display: none; position: absolute; bottom: calc(100% + 8px); right: 0;
+  background: var(--navy); color: var(--white); font-size: 11px;
+  padding: 8px 12px; border-radius: 8px; width: 220px; z-index: 200;
+  line-height: 1.5;
+}
+.tooltip-wrap:hover .tooltip-box { display: block; }
+
+/* ── TABS ── */
+.page-tabs {
+  display: flex; gap: 4px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.page-tab {
+  padding: 9px 18px; border-radius: 10px; cursor: pointer;
+  font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 600;
+  border: 1.5px solid var(--gray-200); background: var(--white);
+  color: var(--gray-400); transition: all 0.15s;
+}
+.page-tab:hover { border-color: var(--navy); color: var(--navy); }
+.page-tab.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+/* ── MISC ── */
+.progress-indicator {
+  display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap;
+}
+.prog-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gray-200); transition: background 0.3s;
+}
+.prog-dot.done { background: var(--teal); }
+
+.empty-state {
+  text-align: center; padding: 60px 20px; color: var(--gray-400);
+}
+.empty-state p { font-size: 14px; }
+
+.notification {
+  position: fixed; bottom: 24px; left: 24px; z-index: 300;
+  background: var(--navy); color: var(--white); padding: 12px 20px;
+  border-radius: 10px; font-size: 13px; font-weight: 600;
+  transform: translateY(80px); opacity: 0; transition: all 0.3s;
+  border-right: 4px solid var(--gold);
+}
+.notification.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">
+    <div class="logo-icon">CX</div>
+    <div class="header-title">
+      <h1>نموذج تقييم النضج المؤسسي</h1>
+      <p>الإدارة العامة لتجربة المستفيد</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn-header btn-outline" onclick="resetAll()">إعادة تعيين</button>
+    <button class="btn-header btn-outline" onclick="window.print()">طباعة</button>
+    <button class="btn-header btn-gold" onclick="showResults()">عرض النتائج ▼</button>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="score-panel">
+    <div class="score-panel-title">مؤشر النضج الكلي (CX-MI)</div>
+    <div class="score-main">
+      <div class="score-big" id="sidebar-total">—</div>
+      <div class="score-of">/ 5.00</div>
+      <div class="score-badge" id="sidebar-badge">لم يكتمل التقييم</div>
+    </div>
+    <div class="dept-scores">
+      <div class="dept-score-row">
+        <div class="dept-score-label"><span>خدمات المستفيد</span><span id="sb-d1">—</span></div>
+        <div class="dept-bar-bg"><div class="dept-bar-fill" id="sb-bar1" style="width:0%;background:#378ADD"></div></div>
+      </div>
+      <div class="dept-score-row">
+        <div class="dept-score-label"><span>تميز التجربة</span><span id="sb-d2">—</span></div>
+        <div class="dept-bar-bg"><div class="dept-bar-fill" id="sb-bar2" style="width:0%;background:#EF9F27"></div></div>
+      </div>
+      <div class="dept-score-row">
+        <div class="dept-score-label"><span>حوكمة التجربة</span><span id="sb-d3">—</span></div>
+        <div class="dept-bar-bg"><div class="dept-bar-fill" id="sb-bar3" style="width:0%;background:#8E44AD"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-section">
+    <div class="nav-group-title">الصفحات</div>
+    <div class="nav-item active" id="nav-overview" onclick="showPage('overview')">
+      <div class="nav-dot"></div> نظرة عامة
+    </div>
+    <div class="nav-item" id="nav-results" onclick="showPage('results')">
+      <div class="nav-dot"></div> النتائج والتقرير
+    </div>
+
+    <div class="nav-group-title">الإدارات</div>
+
+    <div class="nav-item" id="nav-d1" onclick="showDept(1); showPage('assessment')">
+      <div class="nav-dot"></div>
+      خدمات المستفيد
+      <span class="nav-score-badge" id="nbadge-d1">35%</span>
+    </div>
+    <div class="nav-sub" id="nsub-d1">
+      <div class="nav-sub-item" onclick="scrollToSection('s-c1');showPage('assessment');showDept(1)"><span>●</span> مركز التواصل الموحد</div>
+      <div class="nav-sub-item" onclick="scrollToSection('s-c2');showPage('assessment');showDept(1)"><span>●</span> قسم إدارة البلاغات</div>
+      <div class="nav-sub-item" onclick="scrollToSection('s-c3');showPage('assessment');showDept(1)"><span>●</span> قسم مراقبة العمليات</div>
+    </div>
+
+    <div class="nav-item" id="nav-d2" onclick="showDept(2); showPage('assessment')">
+      <div class="nav-dot"></div>
+      تميز التجربة
+      <span class="nav-score-badge" id="nbadge-d2">30%</span>
+    </div>
+    <div class="nav-sub" id="nsub-d2">
+      <div class="nav-sub-item" onclick="scrollToSection('s-t1');showPage('assessment');showDept(2)"><span>●</span> قسم تصميم التجربة</div>
+      <div class="nav-sub-item" onclick="scrollToSection('s-t2');showPage('assessment');showDept(2)"><span>●</span> قسم التخطيط والتطوير</div>
+      <div class="nav-sub-item" onclick="scrollToSection('s-t3');showPage('assessment');showDept(2)"><span>●</span> قسم التوعية والمعرفة</div>
+    </div>
+
+    <div class="nav-item" id="nav-d3" onclick="showDept(3); showPage('assessment')">
+      <div class="nav-dot"></div>
+      حوكمة التجربة
+      <span class="nav-score-badge" id="nbadge-d3">35%</span>
+    </div>
+    <div class="nav-sub" id="nsub-d3">
+      <div class="nav-sub-item" onclick="scrollToSection('s-h1');showPage('assessment');showDept(3)"><span>●</span> قسم إدارة الأداء</div>
+      <div class="nav-sub-item" onclick="scrollToSection('s-h2');showPage('assessment');showDept(3)"><span>●</span> قسم الجودة الشاملة</div>
+      <div class="nav-sub-item" onclick="scrollToSection('s-h3');showPage('assessment');showDept(3)"><span>●</span> قسم صوت المستفيد</div>
+    </div>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ═══════ OVERVIEW PAGE ═══════ -->
+<div id="page-overview" class="dept-panel active">
+  <div class="section-header">
+    <div class="section-badge" style="background:#E8F8F5;color:#0E8688">نموذج التقييم</div>
+    <h2>نموذج تقييم النضج المؤسسي</h2>
+    <p>أداة تقييم تنفيذية شاملة لقياس نضج الإدارة العامة لتجربة المستفيد على مستوى الإدارة العامة والإدارات والأقسام</p>
+    <div class="section-meta">
+      <div class="meta-item"><div class="meta-dot" style="background:#0E8688"></div> 3 إدارات رئيسية</div>
+      <div class="meta-item"><div class="meta-dot" style="background:#1A5276"></div> 9 أقسام</div>
+      <div class="meta-item"><div class="meta-dot" style="background:#6C3483"></div> 34 معياراً تقييمياً</div>
+      <div class="meta-item"><div class="meta-dot" style="background:#C9A84C"></div> 5 مستويات نضج</div>
+    </div>
+  </div>
+
+  <div class="levels-reference">
+    <h3>مستويات النضج المرجعية</h3>
+    <div class="levels-grid">
+      <div class="level-ref-card" style="background:#FADBD8">
+        <div class="level-ref-num" style="color:#C0392B">1</div>
+        <div class="level-ref-name" style="color:#C0392B">ابتدائي</div>
+        <div class="level-ref-range" style="color:#C0392B">1.0 – 1.8</div>
+      </div>
+      <div class="level-ref-card" style="background:#FDEBD0">
+        <div class="level-ref-num" style="color:#D35400">2</div>
+        <div class="level-ref-name" style="color:#D35400">منظم</div>
+        <div class="level-ref-range" style="color:#D35400">1.9 – 2.6</div>
+      </div>
+      <div class="level-ref-card" style="background:#FEF9E7">
+        <div class="level-ref-num" style="color:#7D6608">3</div>
+        <div class="level-ref-name" style="color:#7D6608">مؤسسي</div>
+        <div class="level-ref-range" style="color:#7D6608">2.7 – 3.4</div>
+      </div>
+      <div class="level-ref-card" style="background:#D6EAF8">
+        <div class="level-ref-num" style="color:#1A5276">4</div>
+        <div class="level-ref-name" style="color:#1A5276">مُدار بالقياس</div>
+        <div class="level-ref-range" style="color:#1A5276">3.5 – 4.2</div>
+      </div>
+      <div class="level-ref-card" style="background:#E8DAEF">
+        <div class="level-ref-num" style="color:#6C3483">5</div>
+        <div class="level-ref-name" style="color:#6C3483">متكامل استباقي</div>
+        <div class="level-ref-range" style="color:#6C3483">4.3 – 5.0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula-card">
+    <h3>آلية احتساب مؤشر النضج (CX-MI)</h3>
+    <div class="formula-grid">
+      <div class="formula-item">
+        <div class="formula-item-title">خطوة 1 — درجة القسم</div>
+        <code>Σ (درجة المعيار × وزنه)<br>÷ مجموع الأوزان</code>
+      </div>
+      <div class="formula-item">
+        <div class="formula-item-title">خطوة 2 — درجة الإدارة</div>
+        <code>Σ (درجة القسم × وزن القسم%)</code>
+      </div>
+      <div class="formula-item">
+        <div class="formula-item-title">خطوة 3 — المؤشر الكلي</div>
+        <code>(خدمات × 35%) +<br>(تميز × 30%) +<br>(حوكمة × 35%)</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="overview-grid">
+    <div class="overview-card" onclick="showDept(1); showPage('assessment')" style="border-right: 4px solid #378ADD">
+      <div class="ov-badge" style="background:#D6EAF8;color:#1A5276">وزن 35%</div>
+      <div class="ov-title">إدارة خدمات المستفيد</div>
+      <div class="ov-sub">3 أقسام · 13 معياراً</div>
+      <div class="ov-score" style="color:#1A5276" id="ov-d1">—</div>
+      <div class="ov-score-of">/ 5.00</div>
+      <div class="ov-bar-bg"><div class="ov-bar-fill" id="ov-bar1" style="width:0%;background:#378ADD"></div></div>
+      <div class="ov-sections">
+        <div class="ov-sec-row"><span class="ov-sec-name">مركز التواصل الموحد</span><span class="ov-sec-score" id="ovs-c1" style="color:#1A5276">—</span></div>
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم إدارة البلاغات</span><span class="ov-sec-score" id="ovs-c2" style="color:#1A5276">—</span></div>
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم مراقبة العمليات</span><span class="ov-sec-score" id="ovs-c3" style="color:#1A5276">—</span></div>
+      </div>
+    </div>
+    <div class="overview-card" onclick="showDept(2); showPage('assessment')" style="border-right: 4px solid #EF9F27">
+      <div class="ov-badge" style="background:#FAEEDA;color:#854F0B">وزن 30%</div>
+      <div class="ov-title">إدارة تميز التجربة</div>
+      <div class="ov-sub">3 أقسام · 11 معياراً</div>
+      <div class="ov-score" style="color:#854F0B" id="ov-d2">—</div>
+      <div class="ov-score-of">/ 5.00</div>
+      <div class="ov-bar-bg"><div class="ov-bar-fill" id="ov-bar2" style="width:0%;background:#EF9F27"></div></div>
+      <div class="ov-sections">
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم تصميم تجربة المستفيد</span><span class="ov-sec-score" id="ovs-t1" style="color:#854F0B">—</span></div>
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم التخطيط والتطوير</span><span class="ov-sec-score" id="ovs-t2" style="color:#854F0B">—</span></div>
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم التوعية وإدارة المعرفة</span><span class="ov-sec-score" id="ovs-t3" style="color:#854F0B">—</span></div>
+      </div>
+    </div>
+    <div class="overview-card" onclick="showDept(3); showPage('assessment')" style="border-right: 4px solid #8E44AD">
+      <div class="ov-badge" style="background:#E8DAEF;color:#6C3483">وزن 35%</div>
+      <div class="ov-title">إدارة حوكمة التجربة</div>
+      <div class="ov-sub">3 أقسام · 10 معايير</div>
+      <div class="ov-score" style="color:#6C3483" id="ov-d3">—</div>
+      <div class="ov-score-of">/ 5.00</div>
+      <div class="ov-bar-bg"><div class="ov-bar-fill" id="ov-bar3" style="width:0%;background:#8E44AD"></div></div>
+      <div class="ov-sections">
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم إدارة الأداء</span><span class="ov-sec-score" id="ovs-h1" style="color:#6C3483">—</span></div>
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم الجودة الشاملة</span><span class="ov-sec-score" id="ovs-h2" style="color:#6C3483">—</span></div>
+        <div class="ov-sec-row"><span class="ov-sec-name">قسم صوت المستفيد</span><span class="ov-sec-score" id="ovs-h3" style="color:#6C3483">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:16px">
+    <button class="btn-gold" style="padding:12px 32px;border-radius:10px;font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none" onclick="showDept(1);showPage('assessment')">ابدأ التقييم ←</button>
+  </div>
+</div>
+
+<!-- ═══════ ASSESSMENT PAGE ═══════ -->
+<div id="page-assessment" class="dept-panel" style="display:none">
+  <div class="page-tabs">
+    <button class="page-tab active" id="tab-d1" onclick="showDept(1)">إدارة خدمات المستفيد</button>
+    <button class="page-tab" id="tab-d2" onclick="showDept(2)">إدارة تميز التجربة</button>
+    <button class="page-tab" id="tab-d3" onclick="showDept(3)">إدارة حوكمة التجربة</button>
+  </div>
+
+  <!-- DEPT 1 -->
+  <div id="dp1" class="dept-panel active">
+    <div class="section-header">
+      <div class="section-badge" style="background:#D6EAF8;color:#1A5276">وزن 35% · 3 أقسام · 13 معياراً</div>
+      <h2>إدارة خدمات المستفيد</h2>
+      <p>تقييم نضج تشغيل قنوات التواصل، معالجة البلاغات، والتزامات مستوى الخدمة</p>
+    </div>
+    <div id="s-c1" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#D6EAF8;color:#1A5276">01</div>
+          <div>
+            <div class="section-card-name">مركز التواصل الموحد</div>
+            <div class="section-card-sub">وزن 40% من الإدارة · 5 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">40%</div>
+          <div class="section-score-circle" id="ssc-c1">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body">
+        <!-- Criteria injected by JS -->
+      </div>
+    </div>
+    <div id="s-c2" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#D6EAF8;color:#1A5276">02</div>
+          <div>
+            <div class="section-card-name">قسم إدارة بلاغات المستفيد</div>
+            <div class="section-card-sub">وزن 35% من الإدارة · 4 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">35%</div>
+          <div class="section-score-circle" id="ssc-c2">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+    <div id="s-c3" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#D6EAF8;color:#1A5276">03</div>
+          <div>
+            <div class="section-card-name">قسم مراقبة العمليات</div>
+            <div class="section-card-sub">وزن 25% من الإدارة · 3 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">25%</div>
+          <div class="section-score-circle" id="ssc-c3">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+  </div>
+
+  <!-- DEPT 2 -->
+  <div id="dp2" class="dept-panel" style="display:none">
+    <div class="section-header">
+      <div class="section-badge" style="background:#FAEEDA;color:#854F0B">وزن 30% · 3 أقسام · 11 معياراً</div>
+      <h2>إدارة تميز تجربة المستفيد</h2>
+      <p>تقييم نضج تصميم التجربة، التخطيط والتطوير، وإدارة المعرفة</p>
+    </div>
+    <div id="s-t1" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#FAEEDA;color:#D35400">01</div>
+          <div>
+            <div class="section-card-name">قسم تصميم تجربة المستفيد</div>
+            <div class="section-card-sub">وزن 40% من الإدارة · 4 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">40%</div>
+          <div class="section-score-circle" id="ssc-t1">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+    <div id="s-t2" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#FAEEDA;color:#D35400">02</div>
+          <div>
+            <div class="section-card-name">قسم التخطيط والتطوير</div>
+            <div class="section-card-sub">وزن 35% من الإدارة · 3 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">35%</div>
+          <div class="section-score-circle" id="ssc-t2">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+    <div id="s-t3" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#FAEEDA;color:#D35400">03</div>
+          <div>
+            <div class="section-card-name">قسم التوعية وإدارة المعرفة</div>
+            <div class="section-card-sub">وزن 25% من الإدارة · 4 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">25%</div>
+          <div class="section-score-circle" id="ssc-t3">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+  </div>
+
+  <!-- DEPT 3 -->
+  <div id="dp3" class="dept-panel" style="display:none">
+    <div class="section-header">
+      <div class="section-badge" style="background:#E8DAEF;color:#6C3483">وزن 35% · 3 أقسام · 10 معايير</div>
+      <h2>إدارة حوكمة تجربة المستفيد</h2>
+      <p>تقييم نضج إدارة الأداء، الجودة الشاملة، وصوت المستفيد</p>
+    </div>
+    <div id="s-h1" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#E8DAEF;color:#6C3483">01</div>
+          <div>
+            <div class="section-card-name">قسم إدارة الأداء</div>
+            <div class="section-card-sub">وزن 40% من الإدارة · 4 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">40%</div>
+          <div class="section-score-circle" id="ssc-h1">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+    <div id="s-h2" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#E8DAEF;color:#6C3483">02</div>
+          <div>
+            <div class="section-card-name">قسم الجودة الشاملة</div>
+            <div class="section-card-sub">وزن 35% من الإدارة · 3 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">35%</div>
+          <div class="section-score-circle" id="ssc-h2">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+    <div id="s-h3" class="section-card">
+      <div class="section-card-header" onclick="toggleSection(this)">
+        <div class="section-card-title">
+          <div class="section-icon" style="background:#E8DAEF;color:#6C3483">03</div>
+          <div>
+            <div class="section-card-name">قسم صوت المستفيد</div>
+            <div class="section-card-sub">وزن 25% من الإدارة · 3 معايير</div>
+          </div>
+        </div>
+        <div class="section-card-meta">
+          <div class="section-weight-tag">25%</div>
+          <div class="section-score-circle" id="ssc-h3">—</div>
+          <div class="toggle-icon">▼</div>
+        </div>
+      </div>
+      <div class="section-card-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ RESULTS PAGE ═══════ -->
+<div id="page-results" class="dept-panel" style="display:none">
+  <div class="section-header">
+    <div class="section-badge" style="background:#E8F8F5;color:#0E8688">تقرير التقييم</div>
+    <h2>النتائج والمخرجات النهائية</h2>
+    <p>ملخص نتائج تقييم النضج المؤسسي للإدارة العامة لتجربة المستفيد</p>
+  </div>
+
+  <div id="results-empty" class="empty-state">
+    <p>لم يكتمل التقييم بعد. يرجى إدخال درجات جميع المعايير للحصول على النتائج.</p>
+    <button style="margin-top:16px;padding:10px 24px;border-radius:8px;background:var(--navy);color:white;border:none;font-family:Cairo,sans-serif;font-size:13px;font-weight:600;cursor:pointer" onclick="showDept(1);showPage('assessment')">انتقل إلى التقييم ←</button>
+  </div>
+
+  <div id="results-content" style="display:none">
+    <div class="result-gauge">
+      <div style="font-size:13px;color:var(--gray-400);margin-bottom:8px">مؤشر النضج الكلي للإدارة العامة لتجربة المستفيد</div>
+      <div class="gauge-score" id="res-big-score">—</div>
+      <div class="gauge-of">/ 5.00</div>
+      <div class="gauge-label" id="res-level-label">—</div>
+      <div class="gauge-bar-wrap">
+        <div class="gauge-bar-bg">
+          <div class="gauge-bar-fill" id="res-gauge-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-depts">
+      <div class="result-dept-card">
+        <div class="result-dept-name">إدارة خدمات المستفيد (35%)</div>
+        <div class="result-dept-score" style="color:#1A5276" id="res-d1-score">—</div>
+        <div class="result-dept-level" id="res-d1-level" style="color:#1A5276">—</div>
+        <div class="result-dept-bar-bg"><div class="result-dept-bar" id="res-d1-bar" style="width:0%;background:#378ADD"></div></div>
+      </div>
+      <div class="result-dept-card">
+        <div class="result-dept-name">إدارة تميز التجربة (30%)</div>
+        <div class="result-dept-score" style="color:#854F0B" id="res-d2-score">—</div>
+        <div class="result-dept-level" id="res-d2-level" style="color:#854F0B">—</div>
+        <div class="result-dept-bar-bg"><div class="result-dept-bar" id="res-d2-bar" style="width:0%;background:#EF9F27"></div></div>
+      </div>
+      <div class="result-dept-card">
+        <div class="result-dept-name">إدارة حوكمة التجربة (35%)</div>
+        <div class="result-dept-score" style="color:#6C3483" id="res-d3-score">—</div>
+        <div class="result-dept-level" id="res-d3-level" style="color:#6C3483">—</div>
+        <div class="result-dept-bar-bg"><div class="result-dept-bar" id="res-d3-bar" style="width:0%;background:#8E44AD"></div></div>
+      </div>
+    </div>
+
+    <div class="gaps-card">
+      <h3>خريطة الفجوات — المعايير الأدنى من المستوى 3</h3>
+      <div class="gap-row gap-row-hd">
+        <span>الإدارة / القسم</span>
+        <span>المعيار</span>
+        <span>الدرجة</span>
+        <span>الفجوة</span>
+        <span>التوصية</span>
+      </div>
+      <div id="gaps-list"></div>
+    </div>
+
+    <div class="gaps-card">
+      <h3>ملخص درجات الأقسام التسعة</h3>
+      <div id="sections-summary"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="notification" id="notif"></div>
+
+<script>
+// ══════════════════════════════════════════════
+// DATA MODEL
+// ══════════════════════════════════════════════
+const LEVELS = ['ابتدائي','منظم','مؤسسي','مُدار','استباقي'];
+
+const SECTIONS = [
+  // ─ DEPT 1 ─
+  {
+    id:'c1', deptId:1, name:'مركز التواصل الموحد', weight:0.40,
+    criteria:[
+      {
+        id:'c1_1', name:'تعدد قنوات التواصل', weight:0.20,
+        desc:'مدى توفر وتنوع قنوات التواصل مع المستفيد وتكاملها',
+        evidence:'قائمة القنوات المفعّلة، تقارير حجم التواصل',
+        levels:['قناة واحدة فقط بلا توثيق','قناتان أو ثلاث بلا تكامل بينها','قنوات متعددة موحدة على منصة واحدة مع توثيق رسمي','قياس أداء كل قناة وتحليل التوزيع الفعلي للطلبات','إدارة ذكية للقنوات مع توجيه تلقائي حسب طبيعة الطلب'],
+        rec:'توثيق القنوات وإنشاء منصة موحدة للتواصل'
+      },
+      {
+        id:'c1_2', name:'معدل الحل في الاتصال الأول (FCR)', weight:0.20,
+        desc:'نسبة الطلبات المحلولة دون الحاجة لإعادة التواصل',
+        evidence:'تقارير FCR، سجلات نظام الحالات',
+        levels:['لا يُقاس، ويعتمد على اجتهاد الموظف','يُقاس أحياناً دون معدل مستهدف رسمي','معدل مستهدف محدد (70%+) ويُتابع شهرياً','مرتبط بخطط تحسين الكفاءة وتدريب الموظفين','تحليل أسباب عدم الحل وتحسين استباقي للعمليات'],
+        rec:'تحديد معدل FCR مستهدف وتتبعه شهرياً'
+      },
+      {
+        id:'c1_3', name:'متوسط وقت الانتظار', weight:0.15,
+        desc:'زمن انتظار المستفيد قبل الإجابة عبر القنوات المختلفة',
+        evidence:'تقارير نظام الاتصال، SLA الموثق',
+        levels:['غير مقاس ولا توجد سياسة انتظار','يُقاس يدوياً بشكل غير منتظم','هدف زمني موثق في SLA ويُرصد يومياً','تحليل فجوات وتدخل تصحيحي فوري عند التجاوز','نمذجة الطلب المستقبلي لضبط التوظيف والجاهزية'],
+        rec:'توثيق SLA لوقت الانتظار وتفعيل آلية رصد يومية'
+      },
+      {
+        id:'c1_4', name:'رضا المستفيد عن التواصل (CSAT)', weight:0.15,
+        desc:'مستوى رضا المستفيد بعد كل تفاعل مع المركز',
+        evidence:'استطلاع CSAT، نتائج CSI',
+        levels:['لا يُقاس رضا المستفيد بعد التواصل','استطلاع دوري غير منتظم دون متابعة النتائج','CSAT منتظم بعد كل تفاعل مع تقرير شهري','نتائج CSAT مدمجة في تحسين العمليات والتدريب','تحليل تنبؤي لمخاطر انخفاض الرضا وتدخل وقائي'],
+        rec:'تفعيل CSAT منتظم بعد كل تفاعل وربطه بخطط التحسين'
+      },
+      {
+        id:'c1_5', name:'الالتزام باتفاقيات مستوى الخدمة (SLA)', weight:0.30,
+        desc:'نسبة الالتزام بالأهداف الزمنية المتفق عليها في SLA',
+        evidence:'SLA الموثق، تقارير الالتزام الأسبوعي',
+        levels:['لا توجد اتفاقيات SLA رسمية','اتفاقيات جزئية غير مطبقة بشكل منتظم','اتفاقيات SLA كاملة معتمدة مع قياس أسبوعي','تحليل الانحرافات مع خطط تصحيح فورية','نمذجة ذكية للالتزام مع تدخلات وقائية'],
+        rec:'رفع اتفاقيات SLA واعتمادها رسمياً من الإدارة العليا'
+      }
+    ]
+  },
+  {
+    id:'c2', deptId:1, name:'قسم إدارة بلاغات المستفيد', weight:0.35,
+    criteria:[
+      {
+        id:'c2_1', name:'دورة حياة البلاغ الكاملة', weight:0.25,
+        desc:'منهجية معالجة البلاغ من الاستقبال حتى الإغلاق',
+        evidence:'دليل الإجراءات، تقارير البلاغات',
+        levels:['البلاغات تُعالج دون منهجية أو توثيق','إجراء موثق جزئياً للاستقبال والإغلاق فقط','دورة حياة كاملة موثقة بمراحل واضحة ومتابعة رقمية','تحليل دوري لمعدلات الإغلاق وأسباب التأخير','نظام ذكي لتصنيف البلاغات وتوجيهها تلقائياً'],
+        rec:'توثيق دورة حياة البلاغ كاملاً ورقمنتها في نظام موحد'
+      },
+      {
+        id:'c2_2', name:'معدل الإغلاق في الوقت المحدد', weight:0.30,
+        desc:'نسبة البلاغات المغلقة ضمن إطار SLA الزمني',
+        evidence:'تقارير الأداء الشهرية، SLA المعتمد',
+        levels:['لا يوجد التزام زمني رسمي للمعالجة','التزام موجود لكنه غير مدعوم بقياس منتظم','هدف إغلاق 85%+ مع تقرير أسبوعي للمتابعة','تصنيف حالات التأخير وخطط تصحيح فورية لكل منها','نمذجة تنبؤية للبلاغات المتوقعة وإعداد مسبق للموارد'],
+        rec:'تحديد هدف إغلاق رسمي وتفعيل رصد أسبوعي للالتزام'
+      },
+      {
+        id:'c2_3', name:'آلية التصعيد', weight:0.25,
+        desc:'وضوح ورسمية مسارات تصعيد الحالات المعقدة',
+        evidence:'مصفوفة التصعيد، سجلات الحالات',
+        levels:['التصعيد غير رسمي ويعتمد على التقدير الشخصي','معايير تصعيد موجودة لكنها غير موثقة كافية','مصفوفة تصعيد رسمية معتمدة مع مسارات واضحة','قياس دقيق لحالات التصعيد وتحليل أسبابها الجذرية','تنبيه تلقائي للحالات عالية الخطورة قبل التصعيد'],
+        rec:'بناء مصفوفة تصعيد معتمدة وإدراجها في النظام الرقمي'
+      },
+      {
+        id:'c2_4', name:'تصنيف وتحليل البلاغات', weight:0.20,
+        desc:'تحليل أسباب البلاغات لاستخلاص أنماط للتحسين',
+        evidence:'تقارير تصنيف البلاغات، لوحة التحليل',
+        levels:['لا يوجد تصنيف منهجي للبلاغات','تصنيف يدوي جزئي لبعض الفئات','تصنيف رسمي مع تقارير ربع سنوية للأنماط','تحليل إحصائي لأسباب تكرار البلاغات وتوصيات','رادار ذكي يتنبأ بتكرار الأنماط ويقترح الحلول'],
+        rec:'بناء نظام تصنيف رسمي للبلاغات مع تقارير دورية'
+      }
+    ]
+  },
+  {
+    id:'c3', deptId:1, name:'قسم مراقبة العمليات', weight:0.25,
+    criteria:[
+      {
+        id:'c3_1', name:'رصد الأداء اللحظي', weight:0.40,
+        desc:'مستوى توفر لوحة مراقبة لحظية للعمليات التشغيلية',
+        evidence:'لوحة المراقبة، تقارير يومية',
+        levels:['لا توجد لوحة مراقبة، والتقارير دورية فقط','تقارير يومية يدوية دون متابعة لحظية','لوحة مراقبة رقمية تُحدَّث بصورة منتظمة','تنبيهات فورية عند تجاوز العتبات مع بروتوكول استجابة','مراقبة ذكية مع كشف مبكر عن الانحرافات'],
+        rec:'بناء لوحة مراقبة رقمية لحظية للعمليات التشغيلية'
+      },
+      {
+        id:'c3_2', name:'معايير جودة الاستجابة', weight:0.35,
+        desc:'وجود معايير موثقة لجودة الرد على المستفيد',
+        evidence:'نماذج مراجعة الجودة، سجلات اتصالات',
+        levels:['لا توجد معايير جودة للاستجابة موثقة','معايير موجودة لكنها غير مُطبَّقة بشكل منتظم','معايير موثقة مع مراجعة عينات شهرية وتقرير جودة','نتائج الجودة مدمجة في برامج التدريب والتحسين','مراجعة جودة مستمرة مع تغذية راجعة فورية للموظفين'],
+        rec:'توثيق معايير الجودة وتفعيل مراجعة شهرية منتظمة'
+      },
+      {
+        id:'c3_3', name:'دقة وانتظام التقارير التشغيلية', weight:0.25,
+        desc:'جودة وانتظام التقارير المقدمة لإدارة الخدمات',
+        evidence:'أرشيف التقارير، سجلات الاجتماعات',
+        levels:['لا تقارير تشغيلية منتظمة','تقارير شهرية بمعلومات محدودة','تقارير أسبوعية وشهرية موثقة بمؤشرات واضحة','تقارير تحليلية مع توصيات قابلة للتنفيذ','لوحة ذكية تولد تقارير تلقائية مع تحليل سردي'],
+        rec:'تفعيل جدول تقارير أسبوعية وشهرية بنموذج موحد'
+      }
+    ]
+  },
+  // ─ DEPT 2 ─
+  {
+    id:'t1', deptId:2, name:'قسم تصميم تجربة المستفيد', weight:0.40,
+    criteria:[
+      {
+        id:'t1_1', name:'تصميم رحلة المستفيد', weight:0.30,
+        desc:'مستوى توثيق وتطبيق خرائط رحلة المستفيد لكل الخدمات',
+        evidence:'خرائط الرحلات الموثقة، محاضر ورش التصميم',
+        levels:['لا توجد خرائط رحلات موثقة لأي خدمة','رحلات أولية مرسومة لبعض الخدمات فقط','رحلات موثقة لكل الخدمات الرئيسية مع نقاط الألم','رحلات مقاسة بمؤشرات ومراجعة دورية كل 6 أشهر','تصميم تجربة استباقي يتوقع احتياجات المستفيد المستقبلية'],
+        rec:'توثيق خرائط رحلات شاملة لكل الخدمات الرئيسية'
+      },
+      {
+        id:'t1_2', name:'منهجية التصميم المرتكز على المستفيد', weight:0.25,
+        desc:'مدى اعتماد منهجية HCD في تصميم الخدمات والتجارب',
+        evidence:'دليل التصميم، تقارير البحث الميداني',
+        levels:['التصميم يعتمد على الافتراضات الداخلية فقط','بعض المدخلات من المستفيدين لكنها غير منهجية','منهجية Human-Centered Design مطبقة في المشاريع الرئيسية','بحث منتظم مع المستفيدين يُغذّي قرارات التصميم بشكل مقيس','شراكة مستمرة مع المستفيدين في مراحل التصميم والاختبار'],
+        rec:'اعتماد منهجية HCD رسمياً وتدريب الفريق عليها'
+      },
+      {
+        id:'t1_3', name:'تحديد نقاط الألم ومعالجتها', weight:0.25,
+        desc:'منهجية تحديد نقاط الألم في تجربة المستفيد ومعالجتها',
+        evidence:'تقارير نقاط الألم، سجلات مبادرات التحسين',
+        levels:['لا توجد منهجية لتحديد نقاط الألم','نقاط ألم تُحدد أحياناً بلا خطة معالجة','نقاط ألم موثقة لكل رحلة مع خطة معالجة مؤقتة','قياس أثر معالجة نقاط الألم على رضا المستفيد','معالجة استباقية لنقاط الألم المحتملة قبل تأثيرها'],
+        rec:'بناء منهجية توثيق نقاط الألم ومتابعة معالجتها'
+      },
+      {
+        id:'t1_4', name:'نماذج الخدمة (Service Blueprint)', weight:0.20,
+        desc:'توثيق العمليات الأمامية والخلفية المرتبطة برحلة المستفيد',
+        evidence:'نماذج Service Blueprint الموثقة',
+        levels:['لا توجد نماذج خدمة موثقة','نماذج جزئية لبعض الخدمات الرئيسية فقط','نماذج كاملة تغطي العمليات الأمامية والخلفية','ربط نماذج الخدمة بمؤشرات الجودة التشغيلية','تحديث تلقائي للنماذج عند تغيير العمليات'],
+        rec:'بناء نماذج Service Blueprint للخدمات الرئيسية'
+      }
+    ]
+  },
+  {
+    id:'t2', deptId:2, name:'قسم التخطيط والتطوير', weight:0.35,
+    criteria:[
+      {
+        id:'t2_1', name:'خطة تطوير تجربة المستفيد السنوية', weight:0.35,
+        desc:'جودة ومنهجية خطة تطوير تجربة المستفيد للعام الحالي',
+        evidence:'خطة العمل السنوية، محاضر اجتماعات المتابعة',
+        levels:['لا توجد خطة تطوير، والمبادرات عشوائية','خطة تطوير موجودة لكنها غير مرتبطة بمؤشرات','خطة سنوية معتمدة مرتبطة بأهداف تجربة المستفيد','مراجعة ربع سنوية للخطة مع قياس الأثر الفعلي','تخطيط استراتيجي متعدد السنوات يعكس توجهات المستفيد'],
+        rec:'إعداد خطة تطوير سنوية معتمدة مرتبطة بأهداف CX'
+      },
+      {
+        id:'t2_2', name:'إدارة مبادرات التحسين', weight:0.35,
+        desc:'منهجية تحديد وإدارة وقياس مبادرات تطوير تجربة المستفيد',
+        evidence:'سجل المبادرات، تقارير الإنجاز الفصلية',
+        levels:['مبادرات عشوائية بلا سجل أو متابعة','قائمة مبادرات بلا جدول زمني أو مسؤول','سجل رسمي بأولويات ومسؤولين وجداول زمنية','قياس أثر كل مبادرة على تجربة المستفيد بعد التنفيذ','منهجية تحديد المبادرات مبنية على تحليل بيانات المستفيد'],
+        rec:'إنشاء سجل مبادرات رسمي ومتابعته فصلياً'
+      },
+      {
+        id:'t2_3', name:'تمكين الوحدات التنظيمية الداخلية', weight:0.30,
+        desc:'مدى دعم الوحدات الأخرى في تطوير تجربة المستفيد لديها',
+        evidence:'تقارير برامج التمكين، نتائج الوحدات',
+        levels:['لا يوجد دعم للوحدات التنظيمية الأخرى','دعم غير رسمي عند الطلب فقط','برنامج تمكين موثق مع وحدات مختارة','قياس أثر التمكين على أداء الوحدات المستفيدة','شبكة تمكين مؤسسية متكاملة مع قياس مستمر'],
+        rec:'بناء برنامج تمكين وحدات داخلية رسمي ومنتظم'
+      }
+    ]
+  },
+  {
+    id:'t3', deptId:2, name:'قسم التوعية وإدارة المعرفة', weight:0.25,
+    criteria:[
+      {
+        id:'t3_1', name:'قاعدة المعرفة الداخلية', weight:0.40,
+        desc:'مستوى تطوير واستخدام قاعدة المعرفة المؤسسية',
+        evidence:'قاعدة المعرفة، تقارير الاستخدام',
+        levels:['المعرفة غير موثقة وتعتمد على ذاكرة الأفراد','توثيق جزئي في ملفات غير منظمة','قاعدة معرفة رقمية منظمة يمكن الوصول إليها بسهولة','قاعدة معرفة محدّثة بانتظام مع قياس الاستخدام الفعلي','نظام معرفة ذكي يقترح المحتوى تلقائياً للموظفين'],
+        rec:'إنشاء قاعدة معرفة رقمية منظمة وسهلة الوصول'
+      },
+      {
+        id:'t3_2', name:'نقل أفضل الممارسات', weight:0.35,
+        desc:'فعالية برامج تبادل أفضل ممارسات تجربة المستفيد',
+        evidence:'محاضر ورش العمل، تقارير المشاركة',
+        levels:['لا يوجد برنامج لتبادل أفضل الممارسات','تبادل غير رسمي عند الحاجة فقط','جلسات دورية لتبادل الممارسات بين الأقسام والإدارات','قياس أثر برامج التبادل على أداء المستفيدين الداخليين','شبكة معرفة تتعلم ذاتياً من التجارب وتحدث توصياتها'],
+        rec:'جدولة جلسات دورية منتظمة لتبادل أفضل الممارسات'
+      },
+      {
+        id:'t3_3', name:'برامج التوعية الداخلية بثقافة CX', weight:0.25,
+        desc:'مستوى الوعي الداخلي بمبادئ تجربة المستفيد وأهميتها',
+        evidence:'نتائج استطلاعات الوعي، سجلات التدريب',
+        levels:['لا توجد برامج توعية داخلية بتجربة المستفيد','فعاليات توعية سنوية فقط دون قياس الأثر','برنامج توعية دوري لكل الأقسام مع قياس الوعي','قياس مستوى الوعي قبل وبعد البرامج وتطويرها','ثقافة CX راسخة في كل وحدة تنظيمية في الجهة'],
+        rec:'إطلاق برنامج توعية داخلي منتظم بتجربة المستفيد'
+      }
+    ]
+  },
+  // ─ DEPT 3 ─
+  {
+    id:'h1', deptId:3, name:'قسم إدارة الأداء', weight:0.40,
+    criteria:[
+      {
+        id:'h1_1', name:'منظومة مؤشرات الأداء (KPIs)', weight:0.30,
+        desc:'شمولية وتكامل مؤشرات أداء تجربة المستفيد عبر الإدارة',
+        evidence:'دليل المؤشرات (KPI Dictionary)، لوحة الأداء',
+        levels:['مؤشرات غير رسمية وتختلف بين الأقسام','بعض المؤشرات موثقة لكنها غير متكاملة عبر الإدارة','منظومة مؤشرات موحدة معتمدة تغطي كل الأقسام','تحليل اتجاهات المؤشرات ومقارنة بالمعايير المرجعية','مؤشرات تنبؤية تستشرف تجربة المستفيد قبل تدهورها'],
+        rec:'بناء KPI Dictionary موحد معتمد من الإدارة العليا'
+      },
+      {
+        id:'h1_2', name:'لوحة الأداء التنفيذية (Dashboard)', weight:0.25,
+        desc:'مستوى لوحة الأداء المقدمة للإدارة العليا',
+        evidence:'لقطات Dashboard، تقارير مجلس الإدارة',
+        levels:['لا توجد لوحة أداء، والتقارير نصية فقط','تقارير إكسيل يدوية دورية دون تصور بياني','لوحة رقمية تعرض المؤشرات الرئيسية للإدارة العليا','لوحة أداء لحظية مع تنبيهات عند تجاوز العتبات','لوحة ذكية تقترح قرارات تحسين استناداً إلى البيانات'],
+        rec:'بناء Dashboard تنفيذي بمؤشرات CX الرئيسية'
+      },
+      {
+        id:'h1_3', name:'ربط بيانات الأداء بالقرارات', weight:0.25,
+        desc:'مدى استخدام بيانات الأداء في اتخاذ القرارات التشغيلية',
+        evidence:'محاضر اجتماعات الأداء، خطط التدخل',
+        levels:['بيانات الأداء لا تُستخدم في اتخاذ القرار','تُستخدم أحياناً دون آلية رسمية للتدخل','اجتماعات أداء دورية بقرارات مبنية على بيانات','ربط مباشر بين نتائج الأداء وخطط التحسين التشغيلية','قرارات تصحيحية فورية مدمجة في بروتوكول الأداء'],
+        rec:'إنشاء اجتماع أداء دوري مع آلية قرار موثقة وملزمة'
+      },
+      {
+        id:'h1_4', name:'التقارير الدورية للأداء', weight:0.20,
+        desc:'انتظام ومحتوى التقارير المرفوعة للإدارة العليا',
+        evidence:'أرشيف التقارير الدورية، محاضر الاجتماعات',
+        levels:['لا توجد تقارير أداء منتظمة للإدارة','تقارير مجملة دورية بمعلومات محدودة','تقارير شهرية وربع سنوية تحليلية شاملة','تقارير تشمل التوصيات وخطط التحسين المقترحة','تقارير ذكية تُولَّد تلقائياً بتحليل سردي متكامل'],
+        rec:'تفعيل جدول تقارير أداء منتظم بنموذج موحد'
+      }
+    ]
+  },
+  {
+    id:'h2', deptId:3, name:'قسم الجودة الشاملة', weight:0.35,
+    criteria:[
+      {
+        id:'h2_1', name:'نظام إدارة الجودة (QMS)', weight:0.35,
+        desc:'شمولية نظام إدارة الجودة في تجربة المستفيد',
+        evidence:'دليل الجودة، سجلات المراجعات الداخلية',
+        levels:['لا يوجد نظام جودة رسمي للإدارة','معايير جودة جزئية غير مطبقة بانتظام','نظام جودة كامل موثق مع دورة مراجعة سنوية','قياس مؤشرات الجودة مقارنةً بمعايير مرجعية حكومية','نظام جودة يستجيب تلقائياً للانحرافات ويصحح مسارها'],
+        rec:'اعتماد نظام إدارة جودة رسمي وشامل للإدارة'
+      },
+      {
+        id:'h2_2', name:'المراجعات والتدقيق الداخلي', weight:0.35,
+        desc:'انتظام ومنهجية التدقيق الداخلي على عمليات الإدارة',
+        evidence:'تقارير التدقيق، خطط المعالجة',
+        levels:['لا تتم مراجعات دورية للعمليات','مراجعات تتم عند الحوادث أو الضغط الخارجي فقط','خطة تدقيق سنوية مع تقارير موثقة وخطط معالجة','قياس نسبة إغلاق ملاحظات التدقيق في الوقت المحدد','تدقيق مستمر مع رادار مخاطر لرصد الانحرافات مبكراً'],
+        rec:'وضع خطة تدقيق داخلي سنوية وجدول مراجعات منتظم'
+      },
+      {
+        id:'h2_3', name:'توحيد معايير الخدمة عبر القنوات', weight:0.30,
+        desc:'مستوى توحيد معايير جودة الخدمة عبر قنوات التواصل',
+        evidence:'دليل معايير الخدمة، سجلات الجودة',
+        levels:['معايير مختلفة ومتضاربة بين القنوات والأقسام','معايير جزئية لبعض القنوات دون توحيد','معايير موحدة معتمدة ومُطبقة على كل القنوات','قياس التزام القنوات بالمعايير ومعالجة الانحرافات','معايير خدمة ديناميكية تتطور مع توقعات المستفيد'],
+        rec:'توثيق معايير خدمة موحدة وتطبيقها على كل القنوات'
+      }
+    ]
+  },
+  {
+    id:'h3', deptId:3, name:'قسم صوت المستفيد', weight:0.25,
+    criteria:[
+      {
+        id:'h3_1', name:'آليات جمع صوت المستفيد (VoC)', weight:0.30,
+        desc:'تنوع وانتظام آليات رصد آراء وتوقعات المستفيدين',
+        evidence:'نماذج الاستطلاعات، قنوات التغذية الراجعة',
+        levels:['لا توجد آليات منتظمة لجمع آراء المستفيدين','استطلاعات سنوية فقط دون تحليل منهجي','قنوات متعددة لجمع الإشارات مع تحليل ربع سنوي','رصد مستمر لإشارات المستفيد مع تصنيف المواضيع','تحليل مشاعر وتوقعات المستفيدين بأدوات متقدمة'],
+        rec:'بناء منظومة متعددة القنوات لجمع صوت المستفيد'
+      },
+      {
+        id:'h3_2', name:'ترجمة إشارات VoC إلى قرارات وتحسينات', weight:0.30,
+        desc:'فعالية تحويل بيانات صوت المستفيد إلى تحسينات فعلية',
+        evidence:'تقارير VoC، محاضر اجتماعات التحسين',
+        levels:['البيانات تُجمع لكنها لا تُؤثر في أي قرار','استجابة عند الضغط الخارجي فقط دون منهجية','آلية رسمية لتحويل نتائج VoC إلى مبادرات تحسين','ربط مقيس بين نتائج VoC وقرارات التطوير المؤسسي','صوت المستفيد يقود خارطة التطوير المؤسسي الاستراتيجية'],
+        rec:'بناء آلية رسمية لتحويل VoC إلى مبادرات قابلة للتنفيذ'
+      },
+      {
+        id:'h3_3', name:'قياس مؤشرات NPS وCSI', weight:0.25,
+        desc:'انتظام قياس مؤشرات ولاء ورضا المستفيد',
+        evidence:'نتائج NPS وCSI، مقارنة الفترات',
+        levels:['لا يُحتسب NPS أو CSI بأي شكل','يُحتسب سنوياً دون تحليل تفصيلي','يُحتسب ربع سنوياً مع مقارنة تاريخية واتجاهات','تحليل عوامل تأثير المؤشر وخطط تحسين مستهدفة','نمذجة تنبؤية للمؤشر مع تدخلات وقائية قبل الانخفاض'],
+        rec:'تفعيل قياس NPS أو CSI بصورة ربع سنوية منتظمة'
+      }
+    ]
+  }
+];
+
+// Dept config
+const DEPTS = [
+  { id:1, weight:0.35, sections:['c1','c2','c3'], color:'#378ADD' },
+  { id:2, weight:0.30, sections:['t1','t2','t3'], color:'#EF9F27' },
+  { id:3, weight:0.35, sections:['h1','h2','h3'], color:'#8E44AD' }
+];
+
+// Scores storage
+const scores = {};
+
+// ══════════════════════════════════════════════
+// BUILD CRITERIA HTML
+// ══════════════════════════════════════════════
+function buildAllCriteria() {
+  SECTIONS.forEach(sec => {
+    const card = document.getElementById('s-' + sec.id);
+    if (!card) return;
+    const body = card.querySelector('.section-card-body');
+    body.innerHTML = sec.criteria.map(c => buildCriterionHTML(c, sec.id)).join('');
+  });
+}
+
+function buildCriterionHTML(c, secId) {
+  const lvls = c.levels.map((desc, i) => {
+    const names = ['ابتدائي','منظم','مؤسسي','مُدار','استباقي'];
+    return `<div class="level-btn" id="lb-${c.id}-${i+1}" onclick="setScore('${c.id}','${secId}',${i+1},this)">
+      <div class="lb-num">${i+1}</div>
+      <div class="lb-name">${names[i]}</div>
+      <div class="lb-desc">${desc}</div>
+    </div>`;
+  }).join('');
+  return `<div class="criterion" id="cr-${c.id}">
+    <div class="criterion-top">
+      <div class="criterion-info">
+        <div class="criterion-name">${c.name}</div>
+        <div class="criterion-desc">${c.desc}</div>
+      </div>
+      <div class="criterion-weight">وزن ${Math.round(c.weight*100)}%</div>
+    </div>
+    <div class="criterion-evidence"><span>الدليل المطلوب: </span>${c.evidence}</div>
+    <div class="level-selector">${lvls}</div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════
+// SCORING LOGIC
+// ══════════════════════════════════════════════
+function setScore(critId, secId, val, clickedBtn) {
+  scores[critId] = val;
+
+  // Update UI buttons
+  for (let i = 1; i <= 5; i++) {
+    const btn = document.getElementById(`lb-${critId}-${i}`);
+    if (!btn) continue;
+    btn.className = 'level-btn' + (i === val ? ' sel-' + val + ' expanded' : '');
+  }
+
+  recalc();
+  showNotif('تم تسجيل الدرجة ' + val + ' / 5');
+}
+
+function getSectionScore(secId) {
+  const sec = SECTIONS.find(s => s.id === secId);
+  if (!sec) return null;
+  let totalW = 0, totalScore = 0, allFilled = true;
+  sec.criteria.forEach(c => {
+    if (scores[c.id] !== undefined) {
+      totalW += c.weight;
+      totalScore += scores[c.id] * c.weight;
+    } else {
+      allFilled = false;
+    }
+  });
+  if (totalW === 0) return null;
+  return totalScore / totalW;
+}
+
+function getDeptScore(deptId) {
+  const dept = DEPTS.find(d => d.id === deptId);
+  let totalW = 0, totalScore = 0;
+  dept.sections.forEach(secId => {
+    const sec = SECTIONS.find(s => s.id === secId);
+    const ss = getSectionScore(secId);
+    if (ss !== null) {
+      totalW += sec.weight;
+      totalScore += ss * sec.weight;
+    }
+  });
+  if (totalW === 0) return null;
+  return totalScore / totalW;
+}
+
+function getTotal() {
+  let total = 0, totalW = 0;
+  DEPTS.forEach(d => {
+    const ds = getDeptScore(d.id);
+    if (ds !== null) {
+      total += ds * d.weight;
+      totalW += d.weight;
+    }
+  });
+  if (totalW === 0) return null;
+  return total / totalW;
+}
+
+function levelLabel(score) {
+  if (score === null) return '—';
+  if (score >= 4.3) return 'متكامل استباقي';
+  if (score >= 3.5) return 'مُدار بالقياس';
+  if (score >= 2.7) return 'مؤسسي';
+  if (score >= 1.9) return 'منظم';
+  return 'ابتدائي';
+}
+
+function levelColor(score) {
+  if (score === null) return '#9A9589';
+  if (score >= 4.3) return '#6C3483';
+  if (score >= 3.5) return '#1A5276';
+  if (score >= 2.7) return '#7D6608';
+  if (score >= 1.9) return '#D35400';
+  return '#C0392B';
+}
+
+function levelBg(score) {
+  if (score === null) return '#F1EEE8';
+  if (score >= 4.3) return '#E8DAEF';
+  if (score >= 3.5) return '#D6EAF8';
+  if (score >= 2.7) return '#FEF9E7';
+  if (score >= 1.9) return '#FDEBD0';
+  return '#FADBD8';
+}
+
+function recalc() {
+  // Sections
+  SECTIONS.forEach(sec => {
+    const ss = getSectionScore(sec.id);
+    const el = document.getElementById('ssc-' + sec.id);
+    if (el) {
+      el.textContent = ss !== null ? ss.toFixed(1) : '—';
+      el.className = 'section-score-circle' + (ss !== null ? ' scored' : '');
+    }
+    // Overview sections
+    const oel = document.getElementById('ovs-' + sec.id);
+    if (oel) oel.textContent = ss !== null ? ss.toFixed(2) : '—';
+  });
+
+  // Depts
+  DEPTS.forEach(d => {
+    const ds = getDeptScore(d.id);
+    const sbd = document.getElementById('sb-d' + d.id);
+    const sbb = document.getElementById('sb-bar' + d.id);
+    const ovd = document.getElementById('ov-d' + d.id);
+    const ovb = document.getElementById('ov-bar' + d.id);
+    if (sbd) sbd.textContent = ds !== null ? ds.toFixed(2) : '—';
+    if (sbb) sbb.style.width = ds !== null ? ((ds/5)*100)+'%' : '0%';
+    if (ovd) ovd.textContent = ds !== null ? ds.toFixed(2) : '—';
+    if (ovb) ovb.style.width = ds !== null ? ((ds/5)*100)+'%' : '0%';
+    // Nav badge
+    const nb = document.getElementById('nbadge-d' + d.id);
+    if (nb && ds !== null) {
+      nb.textContent = ds.toFixed(1);
+      nb.className = 'nav-score-badge filled';
+    }
+  });
+
+  // Total
+  const total = getTotal();
+  const stEl = document.getElementById('sidebar-total');
+  const sbEl = document.getElementById('sidebar-badge');
+  if (stEl) stEl.textContent = total !== null ? total.toFixed(2) : '—';
+  if (sbEl) {
+    sbEl.textContent = total !== null ? levelLabel(total) : 'لم يكتمل التقييم';
+    sbEl.style.background = total !== null ? levelBg(total) : '';
+    sbEl.style.color = total !== null ? levelColor(total) : '';
+  }
+}
+
+// ══════════════════════════════════════════════
+// NAVIGATION & PAGE MANAGEMENT
+// ══════════════════════════════════════════════
+function showPage(page) {
+  document.getElementById('page-overview').style.display = 'none';
+  document.getElementById('page-assessment').style.display = 'none';
+  document.getElementById('page-results').style.display = 'none';
+
+  ['nav-overview','nav-results','nav-d1','nav-d2','nav-d3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+
+  if (page === 'overview') {
+    document.getElementById('page-overview').style.display = 'block';
+    document.getElementById('nav-overview').classList.add('active');
+  } else if (page === 'assessment') {
+    document.getElementById('page-assessment').style.display = 'block';
+  } else if (page === 'results') {
+    document.getElementById('page-results').style.display = 'block';
+    document.getElementById('nav-results').classList.add('active');
+    renderResults();
+  }
+}
+
+function showDept(n) {
+  [1,2,3].forEach(i => {
+    const dp = document.getElementById('dp'+i);
+    const tab = document.getElementById('tab-d'+i);
+    const nav = document.getElementById('nav-d'+i);
+    const sub = document.getElementById('nsub-d'+i);
+    if (dp) dp.style.display = i===n ? 'block' : 'none';
+    if (tab) tab.classList.toggle('active', i===n);
+    if (nav) nav.classList.toggle('active', i===n);
+    if (sub) sub.classList.toggle('open', i===n);
+  });
+  document.getElementById('page-assessment').style.display = 'block';
+  document.getElementById('page-overview').style.display = 'none';
+  document.getElementById('page-results').style.display = 'none';
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const body = el.querySelector('.section-card-body');
+      const hd = el.querySelector('.section-card-header');
+      if (body && !body.classList.contains('open')) toggleSection(hd);
+    }, 150);
+  }
+}
+
+function toggleSection(hd) {
+  const body = hd.nextElementSibling;
+  const icon = hd.querySelector('.toggle-icon');
+  body.classList.toggle('open');
+  icon.classList.toggle('open');
+  hd.classList.toggle('open');
+}
+
+// ══════════════════════════════════════════════
+// RESULTS RENDERING
+// ══════════════════════════════════════════════
+function renderResults() {
+  const total = getTotal();
+  const hasAny = Object.keys(scores).length > 0;
+
+  document.getElementById('results-empty').style.display = hasAny ? 'none' : 'block';
+  document.getElementById('results-content').style.display = hasAny ? 'block' : 'none';
+
+  if (!hasAny) return;
+
+  // Big score
+  const tScore = total !== null ? total.toFixed(2) : '—';
+  document.getElementById('res-big-score').textContent = tScore;
+  document.getElementById('res-big-score').style.color = levelColor(total);
+  document.getElementById('res-level-label').textContent = levelLabel(total);
+  document.getElementById('res-level-label').style.color = levelColor(total);
+  document.getElementById('res-gauge-bar').style.width = total ? ((total/5)*100)+'%' : '0%';
+  document.getElementById('res-gauge-bar').style.background = levelColor(total);
+
+  // Depts
+  DEPTS.forEach(d => {
+    const ds = getDeptScore(d.id);
+    const scoreEl = document.getElementById('res-d'+d.id+'-score');
+    const levelEl = document.getElementById('res-d'+d.id+'-level');
+    const barEl   = document.getElementById('res-d'+d.id+'-bar');
+    if (scoreEl) { scoreEl.textContent = ds !== null ? ds.toFixed(2) : '—'; scoreEl.style.color = levelColor(ds); }
+    if (levelEl) { levelEl.textContent = levelLabel(ds); }
+    if (barEl)   { barEl.style.width = ds !== null ? ((ds/5)*100)+'%' : '0%'; }
+  });
+
+  // Gaps
+  const gapsList = document.getElementById('gaps-list');
+  const gaps = [];
+  SECTIONS.forEach(sec => {
+    sec.criteria.forEach(c => {
+      if (scores[c.id] !== undefined && scores[c.id] < 3) {
+        const dept = DEPTS.find(d => d.id === sec.deptId);
+        gaps.push({ secName: sec.name, critName: c.name, score: scores[c.id], rec: c.rec, deptColor: dept.color });
+      }
+    });
+  });
+  gaps.sort((a,b) => a.score - b.score);
+
+  if (gaps.length === 0) {
+    gapsList.innerHTML = '<div style="padding:16px;color:var(--green);font-size:13px">لا توجد فجوات حرجة — جميع المعايير في المستوى 3 أو أعلى</div>';
+  } else {
+    gapsList.innerHTML = gaps.map(g => `
+      <div class="gap-row">
+        <span class="gap-section">${g.secName}</span>
+        <span class="gap-criterion">${g.critName}</span>
+        <span class="gap-score" style="color:${levelColor(g.score)}">${g.score}/5</span>
+        <span><span class="gap-badge" style="background:${levelBg(g.score)};color:${levelColor(g.score)}">${levelLabel(g.score)}</span></span>
+        <span class="gap-rec">${g.rec}</span>
+      </div>`).join('');
+  }
+
+  // Sections summary
+  const sumEl = document.getElementById('sections-summary');
+  sumEl.innerHTML = SECTIONS.map(sec => {
+    const ss = getSectionScore(sec.id);
+    const dept = DEPTS.find(d => d.id === sec.deptId);
+    return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:12px">
+      <div style="width:130px;font-weight:600;color:var(--navy)">${sec.name}</div>
+      <div style="flex:1;background:var(--gray-100);border-radius:4px;height:8px;overflow:hidden">
+        <div style="height:8px;border-radius:4px;background:${dept.color};width:${ss ? (ss/5*100) : 0}%;transition:width 0.6s"></div>
+      </div>
+      <div style="font-weight:700;width:40px;text-align:left;color:${levelColor(ss)}">${ss !== null ? ss.toFixed(1) : '—'}</div>
+      <div style="width:90px;font-size:11px;color:${levelColor(ss)}">${levelLabel(ss)}</div>
+    </div>`;
+  }).join('');
+}
+
+function showResults() {
+  showPage('results');
+}
+
+// ══════════════════════════════════════════════
+// RESET
+// ══════════════════════════════════════════════
+function resetAll() {
+  if (!confirm('هل تريد إعادة تعيين جميع الدرجات؟')) return;
+  Object.keys(scores).forEach(k => delete scores[k]);
+  SECTIONS.forEach(sec => {
+    sec.criteria.forEach(c => {
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById(`lb-${c.id}-${i}`);
+        if (btn) btn.className = 'level-btn';
+      }
+    });
+  });
+  recalc();
+  showNotif('تم إعادة تعيين جميع الدرجات');
+}
+
+// ══════════════════════════════════════════════
+// NOTIFICATION
+// ══════════════════════════════════════════════
+let notifTimer;
+function showNotif(msg) {
+  const el = document.getElementById('notif');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildAllCriteria();
+  recalc();
+});
+</script>
+</body>
+</html>
